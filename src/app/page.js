@@ -5,13 +5,8 @@ import ButtonComponent from "./components/ButtonComponent";
 
 export default function Home() {
   return (
-    <div className="max-w-7xl mx-auto h-screen justify-center items-center flex ">
-      <ButtonComponent
-        variant={"green_outline"}
-        icon={"circleArrow"}
-        onClickFn={"submit"}>
-        Submit
-      </ButtonComponent>
+    <div className="h-screen justify-center items-center flex mb-[1000px]">
+      sfsf
     </div>
   );
 }
