@@ -3,6 +3,7 @@
 import Benefits from "./components/landing/Benefits";
 import Hero from "./components/landing/Hero";
 import ScrollAnimation from "./components/ScrollAnimation";
+import TestimonialCarousel from "./components/TestimonialCarousel";
 
 export default function Home() {
   return (
@@ -10,7 +11,7 @@ export default function Home() {
       <Hero />
       <Benefits/>
       <ScrollAnimation/>
-      <Benefits/>
+  <TestimonialCarousel/>
     </div>
   );
 }
