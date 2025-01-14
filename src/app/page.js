@@ -1,22 +1,15 @@
 /** @format */
 
-import React from "react";
-import ButtonComponent from "./components/ButtonComponent";
+import Benefits from "./components/landing/Benefits";
+import Hero from "./components/landing/Hero";
 import ScrollAnimation from "./components/ScrollAnimation";
-import HeroCard from "./components/HeroCard";
 
 export default function Home() {
   return (
-
-
-<div>
-  <div className="h-40"> 
-    <ScrollAnimation />
+    <div className="items-center flex flex-col gap-20">
+      <Hero />
+      <ScrollAnimation/>
+      <Benefits/>
     </div>
-     
-      <div className="h-[800px]">    <HeroCard variant={'dark'}/></div>
-  
-</div>
-
   );
 }
