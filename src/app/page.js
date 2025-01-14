@@ -1,7 +1,11 @@
-import React from 'react'
+/** @format */
+
+import React from "react";
+import ButtonComponent from "./components/ButtonComponent";
 
 export default function Home() {
   return (
-    <div>Home</div>
-  )
+    <div className="h-screen justify-center items-center flex">
+    </div>
+  );
 }
