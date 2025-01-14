@@ -16,7 +16,7 @@ export default function NavBar() {
     { name: "FAQs", link: "/" },
   ];
   return (
-    <div className="fixed w-full max-w-7xl mt-10">
+    <div className="fixed z-50 w-full max-w-7xl mt-10">
       <nav className="flex items-center mx-auto bg-[#347928]/20 backdrop-blur-sm border py-1 px-10 rounded-lg justify-between">
         <Link href={"/"} className="cursor-pointer">
           <Image src={logo} width={80} height={80} alt="logo" />
