@@ -8,6 +8,7 @@ export default function Home() {
   return (
     <div className="items-center flex flex-col gap-20">
       <Hero />
+      <Benefits/>
       <ScrollAnimation/>
       <Benefits/>
     </div>

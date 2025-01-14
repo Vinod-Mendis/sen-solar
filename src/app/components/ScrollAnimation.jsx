@@ -5,19 +5,19 @@ const ScrollAnimation = () => {
   const [currentFrame, setCurrentFrame] = useState(1);
   const [isInView, setIsInView] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [loadingProgress, setLoadingProgress] = useState(0);
   const containerRef = useRef(null);
   const sectionRef = useRef(null);
   const targetFrameRef = useRef(1);
   const rafId = useRef(null);
   const lastScrollTime = useRef(Date.now());
-  const totalFrames = 360;
+  const imageCache = useRef(new Map());
+  const totalFrames = 82;
 
-  // Smooth interpolation function
   const lerp = (start, end, factor) => {
     return start + (end - start) * factor;
   };
 
-  // Calculate frame based on scroll position
   const calculateFrame = () => {
     const section = sectionRef.current;
     if (!section) return 1;
@@ -27,19 +27,17 @@ const ScrollAnimation = () => {
     return Math.max(1, Math.min(totalFrames, Math.ceil(progress * totalFrames)));
   };
 
-  // Smooth frame updates
   const updateFrame = () => {
     if (Math.abs(currentFrame - targetFrameRef.current) > 0.1) {
-      setCurrentFrame(prev => Math.round(lerp(prev, targetFrameRef.current, 0.1)));
+      setCurrentFrame(prev => Math.round(lerp(prev, targetFrameRef.current, 0.15)));
       rafId.current = requestAnimationFrame(updateFrame);
     } else {
       rafId.current = null;
     }
   };
 
-  // Handle scroll position and frame updates
   const handleScrollUpdate = () => {
-    if (!isInView) return;
+    if (!isInView || isLoading) return;
 
     const now = Date.now();
     if (now - lastScrollTime.current < 16) return;
@@ -54,6 +52,63 @@ const ScrollAnimation = () => {
     }
   };
 
+  // Preload all images with parallel loading
+  useEffect(() => {
+    let mounted = true;
+    const preloadImages = async () => {
+      const batchSize = 40; // Load 40 images at once
+      const batches = Math.ceil(totalFrames / batchSize);
+      let loadedCount = 0;
+
+      // Create loading animation
+      const loadingFrame = setInterval(() => {
+        if (mounted) {
+          setCurrentFrame(prev => (prev % 82) + 1);
+        }
+      }, 50);
+
+      // Load all frames in parallel batches
+      for (let batch = 0; batch < batches; batch++) {
+        const start = batch * batchSize + 1;
+        const end = Math.min(start + batchSize - 1, totalFrames);
+        const promises = [];
+
+        for (let i = start; i <= end; i++) {
+          if (!imageCache.current.has(i)) {
+            promises.push(
+              new Promise((resolve) => {
+                const img = new Image();
+                img.onload = () => {
+                  if (mounted) {
+                    imageCache.current.set(i, img);
+                    loadedCount++;
+                    setLoadingProgress(Math.round((loadedCount / totalFrames) * 100));
+                  }
+                  resolve();
+                };
+                img.onerror = resolve; // Continue on error
+                img.src = getFrameSource(i);
+              })
+            );
+          }
+        }
+
+        await Promise.all(promises);
+      }
+
+      if (mounted) {
+        clearInterval(loadingFrame);
+        setIsLoading(false);
+      }
+    };
+
+    preloadImages();
+
+    return () => {
+      mounted = false;
+    };
+  }, []);
+
   useEffect(() => {
     const section = sectionRef.current;
     if (!section || isLoading) return;
@@ -62,15 +117,13 @@ const ScrollAnimation = () => {
       (entries) => {
         const [entry] = entries;
         setIsInView(entry.isIntersecting);
-        
+
         if (entry.isIntersecting) {
-          // When coming back into view, reset to correct frame
           const newFrame = calculateFrame();
           targetFrameRef.current = newFrame;
           setCurrentFrame(newFrame);
           handleScrollUpdate();
         } else {
-          // Clean up animation when leaving view
           if (rafId.current) {
             cancelAnimationFrame(rafId.current);
             rafId.current = null;
@@ -85,7 +138,6 @@ const ScrollAnimation = () => {
 
     observer.observe(section);
 
-    // Unified scroll and wheel handler
     const handleScroll = () => {
       handleScrollUpdate();
     };
@@ -93,7 +145,6 @@ const ScrollAnimation = () => {
     window.addEventListener('scroll', handleScroll, { passive: true });
     window.addEventListener('wheel', handleScroll, { passive: true });
 
-    // Initial frame calculation
     handleScrollUpdate();
 
     return () => {
@@ -106,56 +157,40 @@ const ScrollAnimation = () => {
     };
   }, [isLoading, isInView]);
 
-  // Load first frame
-  useEffect(() => {
-    const testLoad = async () => {
-      try {
-        const img = new Image();
-        img.onload = () => setIsLoading(false);
-        img.onerror = () => setIsLoading(false);
-        img.src = getFrameSource(1);
-      } catch (error) {
-        setIsLoading(false);
-      }
-    };
-    testLoad();
-  }, []);
-
   const getFrameSource = (index) => {
-    return `/frames/frame${index.toString().padStart(3, '0')}.png`;
+    // Add format-auto=webp to convert to WebP
+    return `https://pub-853481d598f7494b82ffe544ae292565.r2.dev/frames/frame${index.toString().padStart(3, '0')}.png?format=auto`;
   };
 
   return (
-    <section 
+    <section
       ref={sectionRef}
       className="w-full h-[300vh] rounded-3xl relative bg-[#D6DFDF]"
     >
-      <div 
+      <div
         ref={containerRef}
         className="sticky top-0 w-full h-screen flex items-center justify-center"
       >
         <div className="relative w-full max-w-6xl mx-auto">
           <div className="aspect-video w-full relative">
-            {isLoading ? (
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="text-black text-lg font-medium">
-                  Loading frames...
+            <img
+              src={getFrameSource(currentFrame)}
+              alt={`Animation frame ${currentFrame}`}
+              className="w-full h-full object-contain"
+              draggable={false}
+            />
+            {isLoading && (
+              <div className="absolute inset-0 bg-[#D6DFDF]/80 backdrop-blur-sm flex flex-col items-center justify-center gap-4">
+                <div className="text-black text-2xl font-medium">
+                  Loading Experience ({loadingProgress}%)
+                </div>
+                <div className="w-64 h-2 bg-black/10 rounded-full overflow-hidden">
+                  <div
+                    className="h-full bg-black transition-all duration-300"
+                    style={{ width: `${loadingProgress}%` }}
+                  />
                 </div>
               </div>
-            ) : (
-              <>
-                <img
-                  src={getFrameSource(currentFrame)}
-                  alt={`Animation frame ${currentFrame}`}
-                  className="w-full h-full object-contain"
-                  draggable={false}
-                />
-                <div className="absolute top-4 left-4 text-black bg-white/50 px-2 py-1 rounded">
-                  Frame: {currentFrame}
-                  <br />
-                  InView: {isInView ? 'Yes' : 'No'}
-                </div>
-              </>
             )}
           </div>
         </div>
