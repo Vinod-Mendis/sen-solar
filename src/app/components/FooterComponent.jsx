@@ -76,7 +76,8 @@ export default function FooterComponent() {
       {/* 3rd row */}
       <div className="flex justify-between items-center mt-5 font-light">
         <p>
-          Copyright© 2025 <Link href={'/'} className="underline">Vixo Labs</Link>&#46; All
+          Copyright© 2025 <Link href={'/'} className="underline">
+          Sen Electrical Technologies (Pvt) Ltd.</Link>&#46; All
           Rights Reserved&#46;
         </p>
         <p className="flex gap-1">

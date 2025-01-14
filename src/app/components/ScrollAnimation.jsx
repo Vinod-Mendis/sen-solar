@@ -165,18 +165,18 @@ const ScrollAnimation = () => {
   return (
     <section
       ref={sectionRef}
-      className="w-full h-[300vh] rounded-3xl relative bg-[#D6DFDF]"
+      className="w-full h-[300vh] relative bg-white"
     >
       <div
         ref={containerRef}
         className="sticky top-0 w-full h-screen flex items-center justify-center"
       >
         <div className="relative w-full max-w-6xl mx-auto">
-          <div className="aspect-video w-full relative">
+          <div className="aspect-video w-full relative ">
             <img
               src={getFrameSource(currentFrame)}
               alt={`Animation frame ${currentFrame}`}
-              className="w-full h-full object-contain"
+              className="w-full h-full object-contain  rounded-3xl "
               draggable={false}
             />
             {isLoading && (
