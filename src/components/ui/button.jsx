@@ -24,9 +24,9 @@ const buttonVariants = cva(
         green_primary:
           "bg-[#347928] text-white font-normal text-xl hover:bg-[#347928]/80 transition",
         green_outline:
-          "bg-transparent border-2 border-[#347928] text-[#347928] font-normal text-xl hover:bg-[#347928]/20 transition ",
+          "bg-transparent border border-[#347928] text-[#347928] font-normal text-xl hover:bg-[#347928]/20 transition ",
         white_outline:
-          "bg-transparent border-2 border-white text-white font-normal text-xl hover:bg-white/20 transition",
+          "bg-transparent border border-white text-white font-normal text-xl hover:bg-white/20 transition",
       },
       size: {
         default: "h-10 px-5 py-6",
