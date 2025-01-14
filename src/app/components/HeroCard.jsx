@@ -30,29 +30,22 @@ export default function HeroCard({ variant }) {
 
   const selectedVariant = variants[variant];
   return (
-    <div>
-      <Card className={`${selectedVariant.card} w-72 rounded-3xl py-4`}>
-        <CardHeader>
-          <div className={`${selectedVariant.iconBg} p-3 w-fit rounded-full`}>
-            <Image
-              src={selectedVariant.icon}
-              width={20}
-              height={25}
-              alt="icon"
-            />
-          </div>
-          <CardTitle className={`${selectedVariant.textColor} text-3xl`}>
-            Energy Independence
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <CardDescription
-            className={`${selectedVariant.textColor} text-base mt-5 leading-tight`}>
-            Enjoy energy security with your own renewable power source, reducing
-            dependence on ullilly companies and foosil fuels
-          </CardDescription>
-        </CardContent>
-      </Card>
-    </div>
+    <Card className={`${selectedVariant.card} w-72 rounded-3xl py-4`}>
+      <CardHeader>
+        <div className={`${selectedVariant.iconBg} p-3 w-fit rounded-full`}>
+          <Image src={selectedVariant.icon} width={20} height={25} alt="icon" />
+        </div>
+        <CardTitle className={`${selectedVariant.textColor} text-3xl`}>
+          Energy Independence
+        </CardTitle>
+      </CardHeader>
+      <CardContent>
+        <CardDescription
+          className={`${selectedVariant.textColor} text-base mt-5 leading-tight`}>
+          Enjoy energy security with your own renewable power source, reducing
+          dependence on ullilly companies and foosil fuels
+        </CardDescription>
+      </CardContent>
+    </Card>
   );
 }
