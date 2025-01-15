@@ -51,7 +51,7 @@ export default function TestimonialCarousel() {
     return () => clearInterval(timer);
   }, []);
   return (
-    <div className="w-full flex flex-col mb-20">
+    <div className="w-full flex flex-col mb-20 max-w-7xl mx-auto">
       {/* title */}
       <div className="flex flex-col gap-5 items-center">
         <div className="bg-[#347928] rounded-full py-1 px-6 text-white text-xl">

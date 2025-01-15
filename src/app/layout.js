@@ -1,3 +1,5 @@
+/** @format */
+
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import NavBar from "./components/NavBar";
@@ -22,14 +24,13 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased max-w-7xl mx-auto`}
-      >
-        <header>
-          <NavBar/>
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <header className="max-w-7xl mx-auto">
+          <NavBar />
         </header>
         {children}
         <footer>
-          <FooterComponent/>
+          <FooterComponent />
         </footer>
       </body>
     </html>
