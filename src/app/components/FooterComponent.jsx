@@ -18,7 +18,7 @@ export default function FooterComponent() {
     { name: "FAQs", link: "/" },
   ];
   return (
-    <div className="mb-10 px-14 py-4 bg-[#163311] h-[628px] rounded-3xl flex flex-col text-white max-w-7xl mx-auto">
+    <div className="mb-10 mt-20 px-14 py-4 bg-[#163311] h-[628px] rounded-3xl flex flex-col text-white max-w-7xl mx-auto">
       {/* 1st row */}
       <div className="flex justify-between items-center mt-10">
         <h1 className="text-6xl font-semibold">Let`s Connect there</h1>
