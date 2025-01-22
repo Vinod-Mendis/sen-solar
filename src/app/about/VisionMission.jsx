@@ -59,7 +59,7 @@ export default function VisionMission() {
             </div>
           </CardHeader>
           <CardContent>
-            <h1 className="text-3xl font-semibold mb-4">Our Mision</h1>
+            <h1 className="text-3xl font-semibold mb-4">Our Mission</h1>
             <p className="text-xl font-light">
               Ensuring customer satisfaction by consistently providing quality
               product and services at affordable prices. Introduction innovative
