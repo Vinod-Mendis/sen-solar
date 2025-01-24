@@ -24,7 +24,7 @@ export default function ButtonComponent({
   const icons = {
     location: map_icon,
     circleArrow:
-      variant === "green_primary" ? circleArrowWhite : circleArrowGreen,
+      variant === "green_primary" || "white_outline"  ? circleArrowWhite : circleArrowGreen,
     arrow: arrow,
     download: download,
   };
@@ -36,7 +36,7 @@ export default function ButtonComponent({
       <Button variant={variant} onClick={click} size={size}>
         {children}
         {iconVariant && (
-          <Image src={iconVariant} width={20} height={20} alt="map-pin" />
+          <Image src={iconVariant} width={22} height={22} alt="map-pin" />
         )}
       </Button>
     </>

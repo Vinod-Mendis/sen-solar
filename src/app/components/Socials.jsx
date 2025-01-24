@@ -8,7 +8,7 @@ import youtube from "../../../public/icons/youtube.svg";
 import tiktok from "../../../public/icons/tiktok.svg";
 import Link from "next/link";
 
-export default function Socials() {
+export default function Socials({ size }) {
   const socialIcons = [
     { name: "instagram", image: instagram, link: "/" },
     { name: "facebook", image: facebook, link: "/" },
@@ -16,14 +16,26 @@ export default function Socials() {
     { name: "youtube", image: youtube, link: "/" },
     { name: "tiktok", image: tiktok, link: "/" },
   ];
+
+  const sizeStyles = {
+    large: { iconSize: 40, padding: "p-4", gap:"gap-4", },
+    small: { iconSize: 20, padding: "p-2", gap:"gap-2", },
+  };
+
+  const selectedSize = sizeStyles[size] || sizeStyles.small;
   return (
-    <div className="flex gap-2">
+    <div className={`flex ${selectedSize.gap}`}>
       {socialIcons.map((icon, index) => (
         <Link
           href={icon.link}
-          className="bg-[#347928] p-2 w-fit rounded-full hover:scale-110 transition"
+          className={`bg-[#347928] ${selectedSize.padding} w-fit rounded-full hover:scale-110 transition`}
           key={index}>
-          <Image src={icon.image} width={20} height={20} alt={icon.name} />
+          <Image
+            src={icon.image}
+            width={selectedSize.iconSize}
+            height={selectedSize.iconSize}
+            alt={icon.name}
+          />
         </Link>
       ))}
     </div>

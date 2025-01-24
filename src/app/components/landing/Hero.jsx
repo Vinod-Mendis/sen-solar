@@ -14,7 +14,7 @@ import HeroCard from "../HeroCard";
 
 export default function Hero() {
   return (
-    <div className="mt-40 w-full flex gap-8">
+    <div className="mt-40 w-full flex gap-8 max-w-7xl mx-auto">
       {/* 1st col */}
       <Card className="h-[684px] bg-[url('/images/heroCardBg.png')] bg-no-repeat bg-cover px-4">
         <CardHeader>
