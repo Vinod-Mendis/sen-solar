@@ -32,7 +32,7 @@ export default function Benefits() {
     },
   ];
   return (
-    <div className="w-full mb-20 mt-10 flex flex-col gap-16 items-center">
+    <div className="w-full mb-20 mt-10 flex flex-col gap-16 items-center max-w-7xl mx-auto">
       {/* title */}
       <div className="flex flex-col gap-2 text-center items-center">
         <h1 className="text-6xl font-semibold">
