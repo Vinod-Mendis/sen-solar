@@ -8,7 +8,7 @@ import ButtonComponent from "../components/ButtonComponent";
 export default function Calculator() {
   return (
     <div className="mx-auto px-4 py-8 max-w-5xl mt-6">
-      <Card className="p-6 bg-[#F9F9F9] py-10 px-20">
+      <Card className="p-6 bg-white py-10 px-20">
         <h1 className="text-[#3E7E45] text-2xl md:text-3xl lg:text-4xl font-medium mb-8">
           Lorem ipsum dolor sit amet consectetur. Est id mus sed in mauris
           pellentesque dolor.

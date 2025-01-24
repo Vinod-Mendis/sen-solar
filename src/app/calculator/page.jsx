@@ -14,7 +14,7 @@ export default function page() {
         <p className="text-2xl">Lorem ipsum dolor sit amet consectetur.</p>
       </div>
       <Calculator />
-      <Card className="bg-[#F9F9F9] p-10 mt-10">
+      <Card className="bg-white p-10 mt-10">
         <CardContent className="pt-6 grid grid-cols-2 items-center">
           {/* col 1 */}
           <div className="">
