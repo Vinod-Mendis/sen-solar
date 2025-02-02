@@ -13,16 +13,20 @@ import TestimonialCarousel from "./components/TestimonialCarousel";
 
 export default function Home() {
   return (
-    <div className="items-center flex flex-col gap-20">
+    <div className="items-center flex flex-col gap-0">
       <Hero />
-      <Benefits />
+      <div className="my-20 w-full">
+      <Benefits />  
+      </div>
       <ScrollAnimation/>
+      <div className=" flex flex-col gap-20 w-full">
       <Solutions />
       <Clients />
       <Map />
       <TestimonialCarousel />
       <ContactUs />
-      <FAQ />
+      <FAQ /> 
+      </div>
     </div>
   );
 }

@@ -2,7 +2,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 
 const ScrollAnimation = () => {
-  const [currentFrame, setCurrentFrame] = useState(1);
+  const [currentFrame, setCurrentFrame] = useState(0);
   const [isInView, setIsInView] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [loadingProgress, setLoadingProgress] = useState(0);
@@ -12,7 +12,7 @@ const ScrollAnimation = () => {
   const rafId = useRef(null);
   const lastScrollTime = useRef(Date.now());
   const imageCache = useRef(new Map());
-  const totalFrames = 82;
+  const totalFrames = 80;
 
   const lerp = (start, end, factor) => {
     return start + (end - start) * factor;
@@ -63,7 +63,7 @@ const ScrollAnimation = () => {
       // Create loading animation
       const loadingFrame = setInterval(() => {
         if (mounted) {
-          setCurrentFrame(prev => (prev % 82) + 1);
+          setCurrentFrame(prev => (prev % 80) + 1);
         }
       }, 50);
 
@@ -159,24 +159,24 @@ const ScrollAnimation = () => {
 
   const getFrameSource = (index) => {
     // Add format-auto=webp to convert to WebP
-    return `https://pub-853481d598f7494b82ffe544ae292565.r2.dev/frames/frame${index.toString().padStart(3, '0')}.png?format=auto`;
+    return `https://pub-64a50b10905d44588ecc0ab3210613fa.r2.dev/frame${index.toString().padStart(4, '0')}.webp`;
   };
 
   return (
     <section
       ref={sectionRef}
-      className="w-full h-[300vh] relative bg-white"
+      className="w-full h-[300vh] relative"
     >
       <div
         ref={containerRef}
         className="sticky top-0 w-full h-screen flex items-center justify-center"
       >
-        <div className="relative w-full max-w-6xl mx-auto">
+        <div className="relative w-full  mx-auto">
           <div className="aspect-video w-full relative ">
             <img
               src={getFrameSource(currentFrame)}
               alt={`Animation frame ${currentFrame}`}
-              className="w-full h-full object-contain  rounded-3xl "
+              className="w-full h-full object-contain "
               draggable={false}
             />
             {isLoading && (

@@ -41,7 +41,7 @@ export default function Solutions() {
     { title: "Enjoy", descritpion: "Start saving with sustainable energy!" },
   ];
   return (
-    <div className="w-full bg-[url('/images/greenBg.png')] bg-no-repeat bg-cover border-2 border-black text-white">
+    <div className="w-full py-20 bg-[url('/images/greenBg.png')] bg-no-repeat bg-cover border-2 border-black text-white">
       <div className="max-w-7xl mx-auto py-20 flex flex-col h-full">
         {/* row 1 */}
         <div className="grid grid-cols-3">
